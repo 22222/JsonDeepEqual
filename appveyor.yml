@@ -1,0 +1,13 @@
+skip_tags: true
+image: Visual Studio 2019
+configuration: Release
+platform: Any CPU
+before_build:
+- cmd: nuget restore
+build:
+  verbosity: minimal
+test_script:
+- cmd: dotnet test
+artifacts:
+- path: JsonDeepEqual\bin\Release\*.nupkg
+- path: JsonDeepEqual\bin\Release\netstandard2.0\*.*
