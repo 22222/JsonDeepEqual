@@ -19,6 +19,8 @@ namespace Two.JsonDeepEqual
 
         public byte[]? BinaryData { get; set; }
 
+        public TestClass1Child? Child { get; set; }
+
         public TestClass1Child[]? ChildArray { get; set; }
 
         public ICollection<TestClass1Child>? ChildCollection { get; set; }

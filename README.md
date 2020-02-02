@@ -135,6 +135,8 @@ JsonDeepEqualAssert.Equal(expected, actual, new JsonDeepEqualDiffOptions
     ExcludePropertyPaths = new[] { "**System/*" },
     PropertyPathFilter = (IEnumerable<string> paths) => paths.Where(p => !p.Contains("System")),
     IgnoreArrayElementOrder = true,
+    IgnoreEmptyArrays = true,
+    IgnoreEmptyObjects = true,
     IgnoreCase = true,
     IgnoreLineEndingDifferences = true,
     IgnoreWhiteSpaceDifferences = true,
@@ -157,7 +159,9 @@ Some options in `JsonDiffOptions` class apply to any type of JSON comparison:
 
 - ExcludePropertyPaths - Property paths to ignore in the equality comparison using [JSON pointer notation](https://tools.ietf.org/html/rfc6901).  The paths can contain glob-style wildcards: `*` to match any property name, `**` to match any path, `?` to match a single character in a property name.
 - PropertyPathFilter - A custom function to choose the property paths that are included in the equality comparison.  Use this if you need more control over the filtering than the "ExcludePropertyPaths" option provides.
-- IgnoreArrayElementOrder - Set to True if you want to treat two collections with the same elements in any order as equal.
+- IgnoreArrayElementOrder - Set to true if you want to treat two collections with the same elements in any order as equal.
+- IgnoreEmptyArrays - Set to true if you want to treat an empty array the same as a null or missing value.
+- IgnoreEmptyObjects - Set to true if you want to treat an empty object the same as a null or missing value.
 - IgnoreCase - Set to true if you want to use case-insensitive comparison for all string values.
 - IgnoreLineEndingDifferences - Set to true if you want to treat `\r\n`, `\r`, and `\n` as equivalent in all string values. 
 - IgnoreWhiteSpaceDifferences - Set to true if you want to treat any number of consecutive whitespace characters as equivalent in all string values.

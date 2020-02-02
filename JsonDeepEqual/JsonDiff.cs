@@ -112,6 +112,33 @@ namespace Two.JsonDeepEqual
                     actual = JValue.CreateNull();
                 }
 
+                if (expected.Type == JTokenType.Null || actual.Type == JTokenType.Null)
+                {
+                    if (options.IgnoreEmptyArrays)
+                    {
+                        if (expected.Type == JTokenType.Array && ((JArray)expected).Count == 0)
+                        {
+                            expected = JValue.CreateNull();
+                        }
+                        if (actual.Type == JTokenType.Array && ((JArray)actual).Count == 0)
+                        {
+                            actual = JValue.CreateNull();
+                        }
+                    }
+
+                    if (options.IgnoreEmptyObjects)
+                    {
+                        if (expected.Type == JTokenType.Object && ((JObject)expected).Count == 0)
+                        {
+                            expected = JValue.CreateNull();
+                        }
+                        if (actual.Type == JTokenType.Object && ((JObject)actual).Count == 0)
+                        {
+                            actual = JValue.CreateNull();
+                        }
+                    }
+                }
+
                 IEnumerable<JsonDiffNode> results;
                 if (expected.Type == JTokenType.Object && actual.Type == JTokenType.Object)
                 {

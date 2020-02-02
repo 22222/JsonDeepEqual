@@ -23,26 +23,6 @@ namespace Two.JsonDeepEqual
         public Func<IEnumerable<string>, IEnumerable<string>>? PropertyPathFilter { get; set; }
 
         /// <summary>
-        /// If true, two arrays will be considered equal if they contain the same elements in any order.
-        /// </summary>
-        public bool IgnoreArrayElementOrder { get; set; }
-
-        /// <summary>
-        /// If true, ignores case differences in all string values and property names.
-        /// </summary>
-        public bool IgnoreCase { get; set; }
-
-        /// <summary>
-        /// If true, treats treats \r\n, \r, and \n as equivalent in all string values.
-        /// </summary>
-        public bool IgnoreLineEndingDifferences { get; set; }
-
-        /// <summary>
-        /// If true, treats spaces, tabs, and other whitespace in any non-zero quantity as equivalent.
-        /// </summary>
-        public bool IgnoreWhiteSpaceDifferences { get; set; }
-
-        /// <summary>
         /// Creates a <see cref="IJsonPropertyPathFilter"/> for these options, or returns null if no filter is needed.
         /// </summary>
         internal Func<IEnumerable<string>, IEnumerable<string>>? ToJsonPropertyPathFilterOrNull()
@@ -61,6 +41,36 @@ namespace Two.JsonDeepEqual
             }
             return excludePropertyPathFilter ?? customFilter;
         }
+
+        /// <summary>
+        /// If true, two arrays will be considered equal if they contain the same elements in any order.
+        /// </summary>
+        public bool IgnoreArrayElementOrder { get; set; }
+
+        /// <summary>
+        /// If true, an empty array will be considered equal to a missing or null value.
+        /// </summary>
+        public bool IgnoreEmptyArrays { get; set; }
+
+        /// <summary>
+        /// If true, an empty object will be considered equal to a missing or null value.
+        /// </summary>
+        public bool IgnoreEmptyObjects { get; set; }
+
+        /// <summary>
+        /// If true, ignores case differences in all string values and property names.
+        /// </summary>
+        public bool IgnoreCase { get; set; }
+
+        /// <summary>
+        /// If true, treats treats \r\n, \r, and \n as equivalent in all string values.
+        /// </summary>
+        public bool IgnoreLineEndingDifferences { get; set; }
+
+        /// <summary>
+        /// If true, treats spaces, tabs, and other whitespace in any non-zero quantity as equivalent.
+        /// </summary>
+        public bool IgnoreWhiteSpaceDifferences { get; set; }
     }
 
     /// <summary>

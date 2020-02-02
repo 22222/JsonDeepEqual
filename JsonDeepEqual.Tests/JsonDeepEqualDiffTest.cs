@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -508,6 +509,69 @@ namespace Two.JsonDeepEqual
             var actual = "hello\r\nworld";
             Assert.NotEmpty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual));
             Assert.Empty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual, new JsonDeepEqualDiffOptions { IgnoreLineEndingDifferences = true }));
+        }
+
+        [Fact]
+        public void EnumerateDifferences_Array_IgnoreEmptyArrays()
+        {
+            var expected = Array.Empty<int>();
+            var actual = default(IEnumerable<int>);
+            Assert.NotEmpty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual));
+            Assert.Empty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual, new JsonDeepEqualDiffOptions { IgnoreEmptyArrays = true }));
+        }
+
+        [Fact]
+        public void EnumerateDifferences_ListTestClass()
+        {
+            var expected = new ListTestClass<int>
+            {
+                Enumerable = Enumerable.Empty<int>(),
+                Array = Array.Empty<int>(),
+                ReadOnlyCollection = Array.Empty<int>(),
+                Collection = new List<int>(0),
+                IList = Array.Empty<int>(),
+                List = new List<int>(0),
+            };
+            var actual = new object();
+            Assert.NotEmpty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual));
+            Assert.Empty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual, new JsonDeepEqualDiffOptions { IgnoreEmptyArrays = true }));
+        }
+
+        [Fact]
+        public void EnumerateDifferences_DictionaryTestClass_IgnoreEmptyObjects()
+        {
+            var expected = new DictionaryTestClass<string, int>
+            {
+                Dictionary = new Dictionary<string, int>(0),
+            };
+            var actual = new DictionaryTestClass<string, int>();
+            Assert.NotEmpty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual));
+            Assert.Empty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual, new JsonDeepEqualDiffOptions { IgnoreEmptyObjects = true }));
+        }
+
+        [Fact]
+        public void EnumerateDifferences_TestClass1_IgnoreEmptyObjects()
+        {
+            var expected = new TestClass1();
+            var actual = default(TestClass1);
+            Assert.NotEmpty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual));
+            Assert.Empty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual, new JsonDeepEqualDiffOptions { IgnoreEmptyObjects = true }));
+        }
+
+        [Fact]
+        public void EnumerateDifferences_TestClass1WithChild_IgnoreEmptyObjects()
+        {
+            var expected = new TestClass1
+            {
+                Id = 1,
+                Child = new TestClass1Child(),
+            };
+            var actual = new TestClass1
+            {
+                Id = 1,
+            };
+            Assert.NotEmpty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual));
+            Assert.Empty(JsonDeepEqualDiff.EnumerateDifferences(expected, actual, new JsonDeepEqualDiffOptions { IgnoreEmptyObjects = true }));
         }
 
         [Theory]

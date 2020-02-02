@@ -108,6 +108,8 @@ namespace SampleConsole
                 ExcludePropertyPaths = new[] { "**System/*" },
                 PropertyPathFilter = (IEnumerable<string> paths) => paths.Where(p => !p.Contains("System")),
                 IgnoreArrayElementOrder = true,
+                IgnoreEmptyArrays = true,
+                IgnoreEmptyObjects = true,
                 IgnoreCase = true,
                 IgnoreLineEndingDifferences = true,
                 IgnoreWhiteSpaceDifferences = true,
