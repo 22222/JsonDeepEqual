@@ -1,0 +1,10 @@
+root = false
+
+[*.cs]
+dotnet_diagnostic.SA1600.severity = none # Elements should be documented
+dotnet_diagnostic.SA1602.severity = none # Enumeration items should be documented
+dotnet_diagnostic.SA1604.severity = none # Element documentation should have summary
+dotnet_diagnostic.SA1611.severity = none # Element parameters should be documented
+dotnet_diagnostic.SA1615.severity = none # Element return value should be documented
+dotnet_diagnostic.SA1616.severity = none # Element return value documentation should have text
+dotnet_diagnostic.SA1618.severity = none # Generic type parameters should be documented

@@ -10,4 +10,5 @@ test_script:
 - cmd: dotnet test
 artifacts:
 - path: JsonDeepEqual\bin\Release\*.nupkg
+- path: JsonDeepEqual\bin\Release\*.snupkg
 - path: JsonDeepEqual\bin\Release\netstandard2.0\*.*
